@@ -65,9 +65,6 @@ function createOptions(response) {
   selectorEl.innerHTML += options;
   new SlimSelect({
     select: '.breed-select',
-    settings: {
-      placeholderText: "Select your cat's breed",
-    },
   });
 }
 getLoader();
