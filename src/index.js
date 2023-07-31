@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import { fetchBreeds, fetchCatByBreed, API_KEY } from './cat-api';
-import 'slim-select/dist/slimselect.css';
+
 axios.defaults.headers.common['x-api-key'] = API_KEY;
 
 const selectorEl = document.querySelector('.breed-select');
