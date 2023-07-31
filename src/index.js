@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import { fetchBreeds, fetchCatByBreed, API_KEY } from './cat-api';
+import 'slim-select/dist/slimselect.css';
 axios.defaults.headers.common['x-api-key'] = API_KEY;
 
 const selectorEl = document.querySelector('.breed-select');
@@ -40,8 +41,8 @@ selectorEl.addEventListener('change', evt => {
     })
     .catch(() => {
       Notify.failure('Sorry, we cannot find information about this cat');
-
       errorShow();
+      catInfoEl.innerHTML = '';
     });
 });
 
@@ -62,5 +63,11 @@ function createOptions(response) {
     .join('');
 
   selectorEl.innerHTML += options;
+  new SlimSelect({
+    select: '.breed-select',
+    settings: {
+      placeholderText: "Select your cat's breed",
+    },
+  });
 }
 getLoader();
