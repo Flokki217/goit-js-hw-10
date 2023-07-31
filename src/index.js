@@ -43,6 +43,7 @@ selectorEl.addEventListener('change', evt => {
       Notify.failure('Sorry, we cannot find information about this cat');
       errorShow();
       catInfoEl.innerHTML = '';
+      selectorEl.disabled = true;
     });
 });
 
