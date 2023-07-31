@@ -6,9 +6,15 @@ axios.defaults.headers.common['x-api-key'] = API_KEY;
 const selectorEl = document.querySelector('.breed-select');
 const catInfoEl = document.querySelector('.cat-info');
 const loaderEl = document.querySelector('.loader');
+const errorEl = document.querySelector('.error');
 function getLoader() {
   loaderEl.classList.toggle('is-hidden');
 }
+console.log(errorEl);
+function errorShow() {
+  errorEl.classList.toggle('is-hidden');
+}
+errorShow();
 getLoader();
 fetchBreeds()
   .then(data => {
@@ -21,14 +27,21 @@ fetchBreeds()
 
 selectorEl.addEventListener('change', evt => {
   getLoader();
+
   fetchCatByBreed(evt.currentTarget.value)
     .then(data => {
+      if (!data.data.length) {
+        throw new Error();
+      }
+
       renderMarkup(data);
       getLoader();
       Notify.success('Take a look for this cutie-pie');
     })
     .catch(() => {
       Notify.failure('Sorry, we cannot find information about this cat');
+
+      errorShow();
     });
 });
 
